@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="http://code.jquery.com/jquery-latest.min.js">
+</script>
+<script>
+
+base_url="/rest/handsets/";
+manufacturers_url="/rest/manufacturers/";
+meta_url="/rest/metadata/";
+function getAuthors(){
+	return tmp;
+}
+
+$(document).ready(function(){
+    $.getJSON(meta_url+"handset",function(data){
+    		$.each(data, function(key, value){
+    			if(key=="_manufacturer_id"){
+    				$("div.form_div").append("<br/>Please select author: <select class='smanu' name='_manufacturer_id'>");
+    				$("div.form_div").append(function(){
+    				$.getJSON(manufacturers_url,function(adata){
+    					$.each(adata, function(akey, avalue){
+    						$(".smanu").append("<option value='"+avalue.id+"'>"+avalue.name+"</option>");
+    					});
+    					
+    				});
+    				}
+    				);
+    					$("div.form_div").append("</select>");
+    			}
+    			else if (key == "instructions"){
+    				$("div.form_div").append("<br/>Please enter " + key + ":"+"<textarea id='instructions' name='"+key+"' rows='10' cols='50'>");
+
+    			}
+    			else if(key!="manufacturer"){
+    				$("div.form_div").append("<br/>Please enter " + key + ":"+"<input type='text' name='"+key+"'"+">");
+    			}
+
+//<input type='text' name='"+key+"'"+">");
+    			
+    		});
+    });
+    $.fn.serializeObject = function()
+    {
+       var o = {};
+       var a = this.serializeArray();
+       $.each(a, function() {
+           if (o[this.name]) {
+               if (!o[this.name].push) {
+                   o[this.name] = [o[this.name]];
+               }
+               o[this.name].push(this.value || '');
+           } else {
+        	   if (this.name == "instructions"){
+   		    	var lines = $('#instructions').val().split(/\n/);
+		    	var texts = [];
+		    	for (var i=0; i < lines.length; i++) {
+		    	  // only push this line if it contains a non whitespace character.
+		    	  if (/\S/.test(lines[i])) {
+		    	    texts.push($.trim(lines[i]));
+		    	  }
+		    	}
+		    	this.value = texts
+        	   }
+               o[this.name] = this.value || '';
+           }
+       });
+       return o;
+    };
+    $('#book_form').submit(function(){
+    	console.log($('#book_form').serializeObject());
+    	postData($('#book_form').serializeObject());
+    	return false;
+    });
+    function postData(data){
+        $.ajax({
+                type: "PUT",
+                url: "/rest/handsets",
+                data: JSON.stringify(data),
+                contentType: "application/json; charset=utf-8",
+                crossDomain: true,
+                dataType: "json",
+                success: function (data, status, jqXHR) {
+                    alert("success");
+                },
+                error: function (jqXHR, status) {
+                    console.log(jqXHR);
+                    alert('failed, please check console for errors');
+                }
+             });
+       }
+});
+
+</script>
+</head>
+<body>
+<div id="container" class="container-fluid">
+	<div class="span6">
+		<form class="form-horizontal" id="book_form" role="form" action="" method="POST">
+			<fieldset>
+				<legend>Add a Book</legend>
+				<div class="form_div"></div>
+			</fieldset>
+	        <input type="submit" value="Create" name="submit" class="btn btn-default">
+		</form>		
+	</div>
+</div>
+</body>
+</html>
