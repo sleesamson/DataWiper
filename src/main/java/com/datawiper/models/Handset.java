@@ -21,10 +21,10 @@ public class Handset {
   private String model;
   private String [] instructions;
   
-  //@JsonIgnore
-  //private OperatingSystem os;
-  //private String _os_id;
-  
+  /*@JsonIgnore
+  private OperatingSystem os;
+  private String _os_id;
+  */
   public String getModel() {
     return model;
   }
@@ -43,7 +43,8 @@ public class Handset {
   public void set_manufacturer_id(String _manufacturer_id) {
     this._manufacturer_id = _manufacturer_id;
   }
-  /*public OperatingSystem getOs() {
+  /*
+  public OperatingSystem getOs() {
     return os;
   }
   public void setOs(OperatingSystem os) {
@@ -54,8 +55,8 @@ public class Handset {
   }
   public void set_os_id(String _os_id) {
     this._os_id = _os_id;
-  }*/
-  
+  }
+  */
   public static void main(String[] args) {
     try {
 
@@ -69,11 +70,11 @@ public class Handset {
         if (auth == false) {
             System.out.println("Could not authenticate");
         }
-        DBCollection booksColl = db.getCollection("handsets");
+        DBCollection coll = db.getCollection("manufacturers");
 
         BasicDBObject document = new BasicDBObject();
         document.put("name", "Blackberry");
-        booksColl.insert(document);
+        coll.insert(document);
 
 
     } catch (UnknownHostException e) {

@@ -18,7 +18,6 @@ public class ListAllManufacturersCommand {
     ArrayList<Manufacturer> manufacturers = new ArrayList<Manufacturer>();
 
     GetManufacturerCommand getManufacturer = new GetManufacturerCommand();
-
     
     try {
        while(cursor.hasNext()) {
