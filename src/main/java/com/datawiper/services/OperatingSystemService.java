@@ -11,27 +11,28 @@ import javax.ws.rs.core.Response;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
+import com.datawiper.commands.GetInstructionsCommand;
 import com.datawiper.commands.ListAllManufacturersCommand;
 import com.datawiper.models.Manufacturer;
 
 
-@Path("/manufacturers")
-public class ManufacturerService {
-  
+@Path("/OS")
+public class OperatingSystemService {
   ObjectMapper mapper = new ObjectMapper();
 
   @GET
+  @Path("/{value}/instructions")
   @Produces(MediaType.APPLICATION_JSON)
-  public Response listManufacturers() {
-      ListAllManufacturersCommand listBooks = new ListAllManufacturersCommand();
-      ArrayList<Manufacturer> list = listBooks.execute();
-      String booksString = null;
+  public Response listInstructions(@PathParam("value") String value) {
+      GetInstructionsCommand instruct = new GetInstructionsCommand();
+      Object instructions = instruct.searchOS(value);
+      String instructString = null;
       try {
-          booksString = mapper.writeValueAsString(list);
+          instructString = mapper.writeValueAsString(instructions);
       } catch (Exception e) {
           e.printStackTrace();
       }
-      return Response.status(200).entity(booksString).build();
+      return Response.status(200).entity(instructString).build();
   
   }
 }

@@ -17,15 +17,29 @@ import com.mongodb.QueryBuilder;
 
 public class GetInstructionsCommand {
   ObjectMapper mapper = new ObjectMapper();
+  BasicDBObject query = new BasicDBObject();
+  ConnectionProvider conn = new ConnectionProvider();
+
+  
+  public Object searchOS(String os)
+  {
+    DBCollection osCollection = conn.getCollection("operatingsystems");
+   
+    query.put("name", os);
+    
+    DBObject osObj = osCollection.findOne(query);
+
+    return osObj.get("instructions");
+  }
   
   public Object searchField(String manufacturer, String model) {
     //String [] instruct = new String[1];
-    ConnectionProvider conn = new ConnectionProvider();
+    //ConnectionProvider conn = new ConnectionProvider();
     DBCollection handsetCollection = conn.getCollection("handsets");
     DBCollection manufacturerCollection = conn.getCollection("manufacturers");
 
     
-    BasicDBObject query = new BasicDBObject();
+    query = new BasicDBObject();
 
     manufacturer = Character.toUpperCase(manufacturer.charAt(0)) + manufacturer.substring(1);
     
