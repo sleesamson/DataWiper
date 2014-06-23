@@ -21,10 +21,10 @@ public class Handset {
   private String model;
   private String [] instructions;
   
-  /*@JsonIgnore
+  @JsonIgnore
   private OperatingSystem os;
   private String _os_id;
-  */
+  
   public String getModel() {
     return model;
   }
@@ -43,7 +43,7 @@ public class Handset {
   public void set_manufacturer_id(String _manufacturer_id) {
     this._manufacturer_id = _manufacturer_id;
   }
-  /*
+  
   public OperatingSystem getOs() {
     return os;
   }
@@ -56,7 +56,7 @@ public class Handset {
   public void set_os_id(String _os_id) {
     this._os_id = _os_id;
   }
-  */
+  
   public static void main(String[] args) {
     try {
 

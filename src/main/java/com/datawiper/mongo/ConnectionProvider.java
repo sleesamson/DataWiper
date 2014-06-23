@@ -1,6 +1,11 @@
 package com.datawiper.mongo;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.UnknownHostException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 import com.datawiper.properties.PropertiesLookup;
 import com.mongodb.DB;
@@ -19,7 +24,6 @@ public class ConnectionProvider {
         String pw = pl.getProperty("mongodbPW");
 
         try {
-
             MongoClient mongo = new MongoClient(dbURL, port);
 
             DB db = mongo.getDB(dbname);
@@ -41,19 +45,6 @@ public class ConnectionProvider {
             e.printStackTrace();
         }
         return null;
-
-    }
-
-    public static void main(String[] args) {
-        ConnectionProvider books = new ConnectionProvider();
-        DBCollection booksCollection = books.getCollection("books");
-        if(booksCollection == null){
-            System.out.println("ERROR:No Connection");
-        }
-        else{
-            System.out.println("SUCCESS:Connected");
-        }
-
     }
 
 }

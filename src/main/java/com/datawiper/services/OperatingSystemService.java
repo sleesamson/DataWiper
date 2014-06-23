@@ -13,12 +13,28 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 import com.datawiper.commands.GetInstructionsCommand;
 import com.datawiper.commands.ListAllManufacturersCommand;
+import com.datawiper.commands.ListAllOS;
 import com.datawiper.models.Manufacturer;
+import com.datawiper.models.OperatingSystem;
 
 
 @Path("/OS")
 public class OperatingSystemService {
   ObjectMapper mapper = new ObjectMapper();
+  
+  @GET
+  @Produces(MediaType.APPLICATION_JSON)
+  public Response listOperatingSystems() {
+      ListAllOS listOS = new ListAllOS();
+      ArrayList<OperatingSystem> list = listOS.execute();
+      String osString = null;
+      try {
+          osString = mapper.writeValueAsString(list);
+      } catch (Exception e) {
+          e.printStackTrace();
+      }
+      return Response.status(200).entity(osString).build(); 
+  }
 
   @GET
   @Path("/{value}/instructions")

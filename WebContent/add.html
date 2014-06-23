@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="http://code.jquery.com/jquery-latest.min.js">
-</script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
-
 base_url="/rest/handsets/";
 manufacturers_url="/rest/manufacturers/";
 meta_url="/rest/metadata/";
+os_url="/rest/OS/";
 function getAuthors(){
 	return tmp;
 }
@@ -15,8 +14,8 @@ function getAuthors(){
 $(document).ready(function(){
     $.getJSON(meta_url+"handset",function(data){
     		$.each(data, function(key, value){
-    			if(key=="_manufacturer_id"){
-    				$("div.form_div").append("<br/>Please select author: <select class='smanu' name='_manufacturer_id'>");
+    			if(key == "_manufacturer_id"){
+    				$("div.form_div").append("<br/>Please select manufacturer: <select class='smanu' name='_manufacturer_id'>");
     				$("div.form_div").append(function(){
     				$.getJSON(manufacturers_url,function(adata){
     					$.each(adata, function(akey, avalue){
@@ -28,13 +27,27 @@ $(document).ready(function(){
     				);
     					$("div.form_div").append("</select>");
     			}
+    			else if(key == "_os_id"){
+    				$("div.form_div").append("<br/>Please select operating system: <select class='sos' name='_os_id'>");
+    				$("div.form_div").append(function(){
+    				$.getJSON(os_url,function(osdata){
+    					$.each(osdata, function(oskey, osvalue){
+    						$(".sos").append("<option value='"+osvalue.id+"'>"+osvalue.name+"</option>");
+    					});
+    					
+    				});
+    				}
+    				);
+    					$("div.form_div").append("</select>");
+    			}
     			else if (key == "instructions"){
     				$("div.form_div").append("<br/>Please enter " + key + ":"+"<textarea id='instructions' name='"+key+"' rows='10' cols='50'>");
 
     			}
-    			else if(key!="manufacturer"){
+    			else if (key != "os"){
     				$("div.form_div").append("<br/>Please enter " + key + ":"+"<input type='text' name='"+key+"'"+">");
     			}
+    			
 
 //<input type='text' name='"+key+"'"+">");
     			
