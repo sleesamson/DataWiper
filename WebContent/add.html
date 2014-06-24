@@ -1,15 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <!-- Bootstrap core CSS -->
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+    <link href="starter-template.css" rel="stylesheet">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
 base_url="/rest/handsets/";
 manufacturers_url="/rest/manufacturers/";
 meta_url="/rest/metadata/";
 os_url="/rest/OS/";
-function getAuthors(){
-	return tmp;
-}
+
 
 $(document).ready(function(){
     $.getJSON(meta_url+"handset",function(data){
@@ -21,7 +33,7 @@ $(document).ready(function(){
     					$.each(adata, function(akey, avalue){
     						$(".smanu").append("<option value='"+avalue.name+"'>"+avalue.name+"</option>");
     					});
-    					
+
     				});
     				}
     				);
@@ -41,7 +53,7 @@ $(document).ready(function(){
     					$("div.form_div").append("</select>");
     			}
     			else if (key == "instructions"){
-    				$("div.form_div").append("<br/>Please enter " + key + ":"+"<textarea id='instructions' name='"+key+"' rows='10' cols='50'>");
+    				$("div.form_div").append("<br/>Please enter " + key + ":"+"<textarea class='form-control' id='instructions' name='"+key+"' rows='10' cols='50'>");
 
     			}
     			else if (key != "os"){
@@ -106,7 +118,7 @@ $(document).ready(function(){
 <body>
 <div id="container" class="container-fluid">
 	<div class="span6">
-		<form class="form-horizontal" id="book_form" role="form" action="" method="POST">
+		<form class="form-horizontal" id="instructions_form" role="form" action="" method="POST">
 			<fieldset>
 				<legend>Add Instructions</legend>
 				<div class="form_div"></div>

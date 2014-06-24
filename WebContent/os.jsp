@@ -16,21 +16,28 @@
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 </head>
 <body>
+<div class="container theme-showcase" role="main">
 <% String os = request.getParameter("os"); %>
-<h4>Instructions for clearing your  <%= os %> Device</h4>
+
+<div class="page-header">
+	<h4>Instructions for clearing your  <%= os %> Device</h4>
+</div>
+
 <%
 String url = String.format("http://datawiper.herokuapp.com/rest/OS/%s/instructions", os);
 ObjectMapper mapper = new ObjectMapper();
 ArrayList<String> instructions = mapper.readValue(new URL(url), ArrayList.class); 
 
 %>
-
+<div class="jumbotron">
 <ol>
 <% for (String step : instructions){ %> 
 	<li><%= step %></li>
 	<%} %>
 
 </ol>
+</div>
+</div>
 </body>
 
 
