@@ -16,14 +16,14 @@ public class Handset {
 
   @JsonIgnore
   private Manufacturer manufacturer;
-  private String _manufacturer_id;
+  private String _manufacturer;
   
   private String model;
   private String [] instructions;
   
   @JsonIgnore
   private OperatingSystem os;
-  private String _os_id;
+  private String _os;
   
   public String getModel() {
     return model;
@@ -37,24 +37,28 @@ public class Handset {
   public void setInstructions(String[] instructions) {
     this.instructions = instructions;
   }
-  public String get_manufacturer_id() {
-    return _manufacturer_id;
+  public String get_manufacturer() {
+    return _manufacturer;
   }
   public void set_manufacturer_id(String _manufacturer_id) {
-    this._manufacturer_id = _manufacturer_id;
+    this._manufacturer = _manufacturer_id;
   }
-  
-  public OperatingSystem getOs() {
+  @JsonIgnore
+  public OperatingSystem getOS() {
     return os;
+  }
+  @JsonIgnore
+  public Manufacturer getManufacturer() {
+    return manufacturer;
   }
   public void setOs(OperatingSystem os) {
     this.os = os;
   }
-  public String get_os_id() {
-    return _os_id;
+  public String get_os() {
+    return _os;
   }
   public void set_os_id(String _os_id) {
-    this._os_id = _os_id;
+    this._os = _os_id;
   }
   
   public static void main(String[] args) {

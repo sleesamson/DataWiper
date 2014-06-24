@@ -14,12 +14,12 @@ function getAuthors(){
 $(document).ready(function(){
     $.getJSON(meta_url+"handset",function(data){
     		$.each(data, function(key, value){
-    			if(key == "_manufacturer_id"){
+    			if(key == "_manufacturer"){
     				$("div.form_div").append("<br/>Please select manufacturer: <select class='smanu' name='_manufacturer_id'>");
     				$("div.form_div").append(function(){
     				$.getJSON(manufacturers_url,function(adata){
     					$.each(adata, function(akey, avalue){
-    						$(".smanu").append("<option value='"+avalue.id+"'>"+avalue.name+"</option>");
+    						$(".smanu").append("<option value='"+avalue.name+"'>"+avalue.name+"</option>");
     					});
     					
     				});
@@ -27,12 +27,12 @@ $(document).ready(function(){
     				);
     					$("div.form_div").append("</select>");
     			}
-    			else if(key == "_os_id"){
+    			else if(key == "_os"){
     				$("div.form_div").append("<br/>Please select operating system: <select class='sos' name='_os_id'>");
     				$("div.form_div").append(function(){
     				$.getJSON(os_url,function(osdata){
     					$.each(osdata, function(oskey, osvalue){
-    						$(".sos").append("<option value='"+osvalue.id+"'>"+osvalue.name+"</option>");
+    						$(".sos").append("<option value='"+osvalue.name+"'>"+osvalue.name+"</option>");
     					});
     					
     				});
@@ -47,10 +47,7 @@ $(document).ready(function(){
     			else if (key != "os"){
     				$("div.form_div").append("<br/>Please enter " + key + ":"+"<input type='text' name='"+key+"'"+">");
     			}
-    			
-
-//<input type='text' name='"+key+"'"+">");
-    			
+    			    			
     		});
     });
     $.fn.serializeObject = function()

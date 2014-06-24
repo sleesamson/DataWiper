@@ -2,10 +2,16 @@ package com.datawiper.models;
 
 import java.io.IOException;
 
+import org.bson.types.ObjectId;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
+
+import com.datawiper.mongo.ConnectionProvider;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBCollection;
+import com.mongodb.DBObject;
 
 public class MongoID {
     private String $oid;
@@ -28,4 +34,5 @@ public class MongoID {
         MongoID a = mapper.readValue(val, MongoID.class);
         return a.get$oid();
     }
+    
 }

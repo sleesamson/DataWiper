@@ -16,11 +16,9 @@ import com.datawiper.commands.ListAllManufacturersCommand;
 import com.datawiper.commands.ListAllOS;
 import com.datawiper.models.Manufacturer;
 import com.datawiper.models.OperatingSystem;
-import com.wordnik.swagger.annotations.*;
 
 
 @Path("/OS")
-@Api(value = "/OS", description = "Lists all Supported Operating Systems")
 public class OperatingSystemService {
   ObjectMapper mapper = new ObjectMapper();
   

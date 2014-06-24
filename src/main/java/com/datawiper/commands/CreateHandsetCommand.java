@@ -11,6 +11,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import postgres.PostgresConnectionProvider;
 
 import com.datawiper.models.Handset;
+import com.datawiper.models.OperatingSystem;
 import com.datawiper.mongo.ConnectionProvider;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
@@ -21,27 +22,12 @@ import com.mongodb.util.JSON;
 public class CreateHandsetCommand {
     ObjectMapper mapper = new ObjectMapper();
     Statement stmt = null;
+    
+    ConnectionProvider conn = new ConnectionProvider();
 
     public boolean execute(Handset hs) {
-      /*
-        ConnectionProvider conn = new ConnectionProvider();
-        DBCollection booksCollection = conn.getCollection("handsets");
-
-        ObjectMapper mapper = new ObjectMapper();
-        
-        try {
-            DBObject dbObject = (DBObject) JSON.parse(mapper
-                    .writeValueAsString(hs));
-            booksCollection.insert(dbObject);
-        } 
-        catch (Exception e) {
-            System.out.println("ERROR during mapping book to Mongo Object");
-            return false;
-        }
-       
-        return true;*/
       String hsJSON = null;
-      
+
       try {
         hsJSON = mapper.writeValueAsString(hs);
       } catch (Exception e) {
@@ -64,7 +50,7 @@ public class CreateHandsetCommand {
       
       try{
         stmt = connection.createStatement();
-        String sql = String.format("INSERT INTO pending (data, count) VALUES ('%s', 0 );", hsJSON);
+        String sql = String.format("INSERT INTO pending (data) VALUES ('%s');", hsJSON);
         stmt.executeUpdate(sql);
         stmt.close();
         connection.close();

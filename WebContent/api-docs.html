@@ -1,0 +1,236 @@
+<html lang="en"><head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Data Wiper</title>
+
+	<style type="text/css">
+
+	body {
+		background-color:#f3f3f3;
+		line-height:1.3;
+	}
+	#container {
+			/*width:960px;
+						margin:10px auto;*/
+			padding:20px;
+			display:block;
+			background-color:#fff;
+			border:1px solid #ccc;
+	}
+	pre {
+		background-color:#fffdc0;
+		margin:0px 0px 30px;
+		text-align:left;
+	}
+
+	td pre {
+     	background-color:#ffffff;
+	}
+
+	code {
+		background-color:#f2f2f2;
+	}
+	h2 {
+		margin: 30px 0px 0px;
+	}
+	p {
+		margin:3px 0px 16px;
+	}
+	a, a:link {
+		padding-left:3px;
+		padding-right:3px;
+	}
+	a:hover {
+		background-color:#666;
+		color:#fff;
+	}
+	ol ol {
+		list-style:lower-alpha;
+	}
+
+	</style>
+
+</head><body>
+
+<div id="container">
+	 <!-- <p style="font-size:10px;text-align:center;color:#990000; font-family:Arial,sans-serif;">CONFIDENTIAL &amp; PROPRIETARY TO CASHSTAR, INC</p> -->
+<h1>Data Wiper Restful Web Service Documentation</h1>
+
+<!-- Table of contents -->
+<h2>Contents</h2>
+<ol>
+<li><a href="#overview">Overview</a></li>
+<li>Services
+  <ol>
+    <li><a href="#supportedos">Get List of Supported Operating Systems</a></li>
+    <li><a href="#instructions">Get Instructions by Operating System</a></li>
+    <li><a href="#manufacturers">Get List of Manufacturers</a></li>
+    <li><a href="#post">Create Instructions</a></li>
+    
+
+  </ol>
+</li>
+
+<h2><a name="overview">Overview</a></h2>
+
+<p>DataWiper is a RESTful web service that allows users to:</p>
+
+<ul>
+    <li>Get Data Removal Instructions based on the Mobile Operating System</li>
+    <li>Post incorrect or missing instructions</li>
+</ul>
+
+
+
+<h2><a name="supportedos">Get Supported Operating Systems(HTTP GET)</a></h2>
+
+<p>A GET method to <code>datawiper.herokuapp.com/rest/OS</code> can be made to return JSON representations of supported Mobile Operating System.
+<p>A successful request will result in an HTTP status code of 200 and a JSON Array list of Operating Systems in the response body.</p>
+
+<p class="code-type">JSON</p>
+
+<pre>[
+    {
+        "name": "Android",
+        "id": "53a4c5f13004945da2e3259f",
+        "instructions": [
+            "Go to Settings",
+            "Depending on your device find either 'Privacy' or 'Backup and Reset' or 'Accounts'",
+            "Go to 'Factory Data Reset' or 'Backup and Reset'",
+            "Tap 'Reset Device'",
+            "Tap 'Delete All/Erase Everything'"
+        ]
+    },
+    {
+        "name": "Windows",
+        "id": "53a4c5ff3004d6fb10353d4f",
+        "instructions": [
+            "In the App list, tap Settings Settings icon",
+            "Tap About, and then tap Reset your phone",
+            "You'll receive two warnings. If you're absolutely sure you want to restore your phone to its factory settings, tap Yes, and then tap Yes again"
+        ]
+    },
+    {
+        "name": "iOS",
+        "id": "53a4c5cb3004b3df767b8507",
+        "instructions": [
+            "Go to Settings",
+            "Go to General",
+            "Go to Reset",
+            "Then tap Erase All Content and Settings."
+        ]
+    },
+    {
+        "name": "Blackberry",
+        "id": "53a83636ea5da5027f00047e",
+        "instructions": [
+            "In the device options, click Security Options.",
+            "Click General Settings.",
+            "Press the Menu key.",
+            "Click Wipe Handheld.",
+            "To delete all third-party applications from your device, select the Include third-party applications check box.",
+            "Click Continue.",
+            "Type blackberry and OK."
+        ]
+    }
+]
+</pre>
+
+<h2><a name="instructions">Get Instructions(HTTP GET)</a></h2>
+<p>To get instructions for a given operating system, request an HTTP GET to this URL 
+	<code>datawiper.herokuapp.com/rest/OS/{operating_system}/instructions</code></p>
+<p>For example, <code>datawiper.herokuapp.com/rest/OS/Windows/instructions</code> will return:</p>
+<p class="code-type">JSON</p>
+<pre>[
+    "In the App list, tap Settings Settings icon",
+    "Tap About, and then tap Reset your phone",
+    "You'll receive two warnings. If you're absolutely sure you want to restore your phone to its factory settings, tap Yes, and then tap Yes again"
+]</pre>
+
+<h2><a name="manufacturers">Get Instructions(HTTP GET)</a></h2>
+<p>To get a list of major smart phone manufacturers, request an HTTP GET to this URL
+	<code>datawiper.herokuapp.com/rest/manufacturers</code></p>
+<p>A successful request will result in an HTTP status code of 200 and a JSON Array list of manufacturers in the response body.</p>
+
+<p class="code-type">JSON</p>
+
+<pre>[
+    {
+        "name": "Apple",
+        "id": "53a4eee3cfed4be145e00d46"
+    },
+    {
+        "name": "Google",
+        "id": "53a4eee4cfed4be145e00d47"
+    },
+    {
+        "name": "HTC",
+        "id": "53a4eee4cfed4be145e00d48"
+    },
+    {
+        "name": "Huawei",
+        "id": "53a4eee4cfed4be145e00d49"
+    },
+    {
+        "name": "LG",
+        "id": "53a4eee4cfed4be145e00d4a"
+    },
+    {
+        "name": "Motorola",
+        "id": "53a4eee4cfed4be145e00d4b"
+    },
+    {
+        "name": "Nokia",
+        "id": "53a4eee4cfed4be145e00d4c"
+    },
+    {
+        "name": "Palm",
+        "id": "53a4eee4cfed4be145e00d4d"
+    },
+    {
+        "name": "Samsung",
+        "id": "53a4eee4cfed4be145e00d4e"
+    },
+    {
+        "name": "Sony",
+        "id": "53a4eee4cfed4be145e00d4f"
+    },
+    {
+        "name": "Sony Ericsson",
+        "id": "53a4eee4cfed4be145e00d50"
+    },
+    {
+        "name": "Blackberry",
+        "id": "53a5a54b30040b637418601b"
+    }
+]</pre>
+
+
+<h2><a name="post">Create Instructions (HTTP PUT)</a></h2>
+
+<p>If you want to contribute and add instructions that are missing or find that existing instructions are inaccurate,
+a PUT method can be issued to <code>datawiper.herokuapp.com/rest/handset</code>.</p>
+
+<p>A successful request will result in an HTTP status code of 201. A failed request will result in code of 500.</p>
+
+<p>The following are valid data values: </p>
+
+<ol>
+  <li><strong>_os</strong> - String value of the name of the Operating System (Example: "iOS")</li>
+  <li><strong>_manufacturer</strong> - String value of the make of the phone (Example: "Apple")</li>
+  <li><strong>model</strong> - String value of the model of the phone (Example: "iPhone 5")</li>
+  <li><strong>instructions</strong> - Array of instructions (Example: ["Do This","Then that"])</li>
+</ol>
+
+<p class="code-type">JSON</p>
+
+
+<pre>{"_os":"iOS","instructions":["Do This","Then that"],"model":"iPhone 5","_manufacturer":"Apple"}</pre>
+
+<p><strong><h3> or use this <a href="add.html">form</a></p></strong></h3>
+<p> Note: Pending requests will be reviewed for accuracy before actually POSTing to our server</p>
+
+
+</div><!-- container -->
+
+</body></html>
