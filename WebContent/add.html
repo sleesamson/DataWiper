@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
     <!-- Bootstrap core CSS -->
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
-    <link href="starter-template.css" rel="stylesheet">
 
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
@@ -15,7 +17,6 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
 base_url="/rest/handsets/";
 manufacturers_url="/rest/manufacturers/";
@@ -53,7 +54,7 @@ $(document).ready(function(){
     					$("div.form_div").append("</select>");
     			}
     			else if (key == "instructions"){
-    				$("div.form_div").append("<br/>Please enter " + key + ":"+"<textarea class='form-control' id='instructions' name='"+key+"' rows='10' cols='50'>");
+    				$("div.form_div").append("<br/>Please enter " + key + "(optional):</br>Separate each instructional step with a new line:"+"<textarea class='form-control' id='instructions' name='"+key+"' rows='10' cols='50'>");
 
     			}
     			else if (key != "os"){
@@ -89,9 +90,9 @@ $(document).ready(function(){
        });
        return o;
     };
-    $('#book_form').submit(function(){
-    	console.log($('#book_form').serializeObject());
-    	postData($('#book_form').serializeObject());
+    $('#instructions_form').submit(function(){
+    	console.log($('#instructions_form').serializeObject());
+    	postData($('#instructions_form').serializeObject());
     	return false;
     });
     function postData(data){
@@ -103,7 +104,7 @@ $(document).ready(function(){
                 crossDomain: true,
                 dataType: "json",
                 success: function (data, status, jqXHR) {
-                    alert("success");
+                    alert("Data Sucessfully Submitted and is now Pending Review");
                 },
                 error: function (jqXHR, status) {
                     console.log(jqXHR);
@@ -123,7 +124,7 @@ $(document).ready(function(){
 				<legend>Add Instructions</legend>
 				<div class="form_div"></div>
 			</fieldset>
-	        <input type="submit" value="Create" name="submit" class="btn btn-default">
+	        <input type="submit" value="Submit" name="submit" class="btn btn-default">
 		</form>		
 	</div>
 </div>
