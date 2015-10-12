@@ -9,19 +9,21 @@
 
     <title>DataWiper</title>
     
-    <script type='text/javascript'>
-	(function () {
-		'use strict';
-		var hd, internal;
-		internal = document.referrer.search(document.domain);
-		if (internal === -1) {
-			hd = document.createElement('script'); hd.type = 'text/javascript'; hd.async = true;
-			hd.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'api.handsetdetection.com/sites/js/51653.js';
-			document.getElementsByTagName("head")[0].appendChild(hd);
-		}
-		}());
-	</script>
+<script type='text/javascript'>
+(function () {
+	var hd,re,dom,d=document;
+	re = d.referrer.toLowerCase().replace(/https?:\/\//i,'').split('/',1)[0];
+	dom = d.domain.toLowerCase();
+	if (re != dom) {
+		hd = d.createElement('script');
+		hd.async = true;
+		hd.src = '//api.handsetdetection.com/apiv4/js/51653.js';
+		d.getElementsByTagName("head")[0].appendChild(hd);
+	}
+}());
+</script>
 
+<script> console.log(HandsetDetection.vendor + HandsetDetection.model) </script>
     <!-- Bootstrap core CSS -->
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 
