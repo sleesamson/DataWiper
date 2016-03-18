@@ -1,1 +1,8 @@
 UNH SaaS Project
+
+RESTful API and Web app that consumes this API.
+
+Provides instructions to data clear your phone.
+
+Visit on your mobile phone to get instructions (may take a few seconds to retrieve instructions)
+http://datawiper.herokuapp.com
